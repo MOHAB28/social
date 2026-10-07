@@ -11,8 +11,9 @@ import { ForgetComponent } from './features/forget/forget.component';
 import { NotFoundComponent } from './features/not-found/not-found.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'auth',
+    path: '',
     component: AuthLayoutComponent,
     children: [
       { path: 'login', component: LoginComponent },
@@ -21,7 +22,7 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'main',
+    path: '',
     component: MainLayoutComponent,
     children: [
       { path: 'profile', component: ProfileComponent },
