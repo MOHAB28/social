@@ -1,13 +1,14 @@
 <h2 class="text-2xl font-bold text-gray-900">Create a new account</h2>
 <p class="text-sm text-gray-500 mb-6">It's quick and easy.</p>
 
-<form class="space-y-4">
+<form (ngSubmit)="register()" class="space-y-4" [formGroup]="registerForm">
   <div class="relative">
     <label for="name" class="sr-only">Full name</label>
     <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
       <i class="fa-regular fa-user text-gray-400"></i>
     </div>
     <input
+      formControlName="name"
       type="text"
       id="name"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
@@ -21,6 +22,7 @@
       <i class="fa-solid fa-at text-gray-400"></i>
     </div>
     <input
+      formControlName="userName"
       type="text"
       id="username"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
@@ -34,6 +36,7 @@
       <i class="fa-regular fa-envelope text-gray-400"></i>
     </div>
     <input
+      formControlName="email"
       type="email"
       id="email"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
@@ -47,6 +50,7 @@
       <i class="fa-solid fa-user-group text-gray-400"></i>
     </div>
     <select
+      formControlName="gender"
       id="gender"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
     >
@@ -62,6 +66,7 @@
       <i class="fa-regular fa-calendar text-gray-400"></i>
     </div>
     <input
+      formControlName="dateOfBirth"
       type="date"
       id="dateOfBirth"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
@@ -74,6 +79,7 @@
       <i class="fa-solid fa-key text-gray-400"></i>
     </div>
     <input
+      formControlName="password"
       type="password"
       id="password"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
@@ -87,6 +93,7 @@
       <i class="fa-solid fa-key text-gray-400"></i>
     </div>
     <input
+      formControlName="rePassword"
       type="password"
       id="rePassword"
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
