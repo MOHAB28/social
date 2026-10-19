@@ -147,8 +147,9 @@
   </div>
 
   <button
+    [disabled]="registerForm.invalid"
     type="submit"
-    class="w-full text-white bg-mainColor hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-semibold rounded-xl text-base px-5 py-3 text-center transition-colors"
+    class="w-full text-white bg-mainColor hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-semibold rounded-xl text-base px-5 py-3 text-center transition-colors disabled:bg-gray-300"
   >
     Create New Account
   </button>
