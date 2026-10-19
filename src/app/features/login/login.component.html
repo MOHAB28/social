@@ -1,1 +1,51 @@
-<p>login works!</p>
+<h2 class="text-2xl font-bold text-gray-900">Welcome back</h2>
+<p class="text-sm text-gray-500 mb-6">Log in to pick up where you left off.</p>
+
+<form class="space-y-4">
+  <div class="relative">
+    <label for="email" class="sr-only">Email address</label>
+    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
+      <i class="fa-regular fa-envelope text-gray-400"></i>
+    </div>
+    <input
+      type="email"
+      id="email"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
+      placeholder="Email address"
+    />
+  </div>
+
+  <div class="relative">
+    <label for="password" class="sr-only">Password</label>
+    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
+      <i class="fa-solid fa-key text-gray-400"></i>
+    </div>
+    <input
+      type="password"
+      id="password"
+      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
+      placeholder="Password"
+    />
+  </div>
+
+  <div class="flex items-center justify-between">
+    <div class="flex items-center">
+      <input
+        id="remember"
+        type="checkbox"
+        class="w-4 h-4 text-mainColor bg-gray-100 border-gray-300 rounded-sm focus:ring-mainColor"
+      />
+      <label for="remember" class="ms-2 text-sm text-gray-600">Remember me</label>
+    </div>
+    <a routerLink="/forget" class="text-sm font-medium text-mainColor hover:underline"
+      >Forgot password?</a
+    >
+  </div>
+
+  <button
+    type="submit"
+    class="w-full text-white bg-mainColor hover:bg-teal-800 focus:ring-4 focus:outline-none focus:ring-teal-300 font-semibold rounded-xl text-base px-5 py-3 text-center transition-colors"
+  >
+    Log In
+  </button>
+</form>

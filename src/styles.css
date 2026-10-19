@@ -7,8 +7,9 @@
 @import 'tailwindcss';
 
 @theme {
-  --color-mainColor: #00298d;
-  --color-secondryColor: #f0f2f5;
+  --color-mainColor: #0f766e;
+  --color-secondryColor: #f3f7f6;
+  --color-accentColor: #f97066;
 }
 
 @utility container {
@@ -16,6 +17,6 @@
 }
 
 body {
-  font-family: 'SN Pro', sans-serif;
+  font-family: 'Outfit', sans-serif;
   background-color: var(--color-secondryColor);
 }
