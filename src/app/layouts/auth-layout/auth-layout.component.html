@@ -1,48 +1,80 @@
-<main class="min-h-screen flex items-center py-10">
-  <div class="container max-w-6xl px-4 grid gap-10 lg:grid-cols-2 lg:gap-16 items-center">
-    <!-- Brand panel -->
-    <section>
-      <div class="flex items-center gap-3 mb-4">
+<main class="min-h-screen grid lg:grid-cols-5 bg-white">
+  <!-- Brand panel -->
+  <section
+    class="relative overflow-hidden lg:col-span-3 flex items-center px-6 py-12 sm:px-12 lg:px-20 text-white bg-linear-to-br from-teal-950 via-teal-900 to-mainColor"
+  >
+    <!-- Decorative glow + thread lines -->
+    <div
+      class="absolute -top-24 -inset-s-24 w-80 h-80 rounded-full bg-accentColor/25 blur-3xl"
+    ></div>
+    <div
+      class="absolute -bottom-32 -inset-e-16 w-96 h-96 rounded-full bg-teal-400/20 blur-3xl"
+    ></div>
+    <svg
+      class="absolute inset-0 w-full h-full text-white/10"
+      viewBox="0 0 400 400"
+      preserveAspectRatio="none"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      aria-hidden="true"
+    >
+      <path d="M-20 80 C 120 20, 200 180, 420 100" />
+      <path d="M-20 200 C 140 140, 260 300, 420 220" />
+      <path d="M-20 330 C 100 270, 240 400, 420 340" />
+    </svg>
+
+    <div class="relative max-w-xl">
+      <div class="flex items-center gap-3 mb-8">
         <span
-          class="relative flex items-center justify-center w-12 h-12 rounded-2xl bg-mainColor text-white text-xl"
+          class="relative flex items-center justify-center w-11 h-11 rounded-2xl bg-white text-mainColor text-lg"
         >
           <i class="fa-solid fa-comments"></i>
           <span
-            class="absolute -top-1 -inset-e-1 w-3.5 h-3.5 rounded-full bg-accentColor ring-2 ring-secondryColor"
+            class="absolute -top-1 -inset-e-1 w-3.5 h-3.5 rounded-full bg-accentColor ring-2 ring-teal-900"
           ></span>
         </span>
-        <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight text-mainColor">threadly</h1>
+        <span class="text-2xl font-bold tracking-tight">threadly</span>
       </div>
-      <p class="text-xl md:text-2xl text-gray-700 mb-8">
-        Every conversation, one thread. Connect with friends and the communities you care about.
+
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight">
+        Every conversation,<br />
+        <span class="text-accentColor">one thread.</span>
+      </h1>
+      <p class="mt-4 text-lg text-teal-50/80">
+        Connect with friends and the communities you care about, without the noise.
       </p>
 
-      <div class="p-6 bg-white border border-teal-100 rounded-2xl shadow-sm">
-        <h2 class="text-sm font-bold tracking-widest uppercase text-mainColor mb-2">
-          About Threadly
-        </h2>
-        <h3 class="text-xl font-semibold text-gray-900 mb-3">
-          A social space built for real conversations since 2021
-        </h3>
-        <p class="text-gray-600 leading-relaxed mb-5">
-          Threadly brings people together around the conversations that matter to them. Share
-          posts, follow friends, join communities, and keep every discussion in one clear thread —
-          without the noise.
-        </p>
-
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-          @for (stat of stats; track stat.label) {
-            <div class="p-3 rounded-xl bg-teal-50 border border-teal-100">
-              <p class="text-lg font-bold text-mainColor">{{ stat.value }}</p>
-              <p class="text-xs font-semibold uppercase text-gray-600">{{ stat.label }}</p>
+      <ul class="hidden sm:block mt-10 space-y-4">
+        @for (feature of features; track feature.title) {
+          <li class="flex items-center gap-4">
+            <span
+              class="flex items-center justify-center w-11 h-11 shrink-0 rounded-xl bg-white/10 text-accentColor"
+            >
+              <i [class]="feature.icon"></i>
+            </span>
+            <div>
+              <p class="font-semibold">{{ feature.title }}</p>
+              <p class="text-sm text-teal-50/70">{{ feature.text }}</p>
             </div>
-          }
-        </div>
-      </div>
-    </section>
+          </li>
+        }
+      </ul>
 
-    <!-- Auth card -->
-    <section class="w-full max-w-md mx-auto lg:ms-auto lg:me-0 p-6 bg-white rounded-3xl shadow-sm">
+      <dl class="hidden sm:flex gap-10 mt-12 pt-6 border-t border-white/15">
+        @for (stat of stats; track stat.label) {
+          <div>
+            <dt class="text-2xl font-bold">{{ stat.value }}</dt>
+            <dd class="text-xs uppercase tracking-wider text-teal-50/60">{{ stat.label }}</dd>
+          </div>
+        }
+      </dl>
+    </div>
+  </section>
+
+  <!-- Auth panel -->
+  <section class="lg:col-span-2 flex items-center justify-center px-6 py-10 sm:px-12">
+    <div class="w-full max-w-md">
       <nav class="grid grid-cols-2 p-1 mb-6 rounded-xl bg-gray-100 text-sm font-semibold">
         <a
           routerLink="/login"
@@ -59,6 +91,6 @@
       </nav>
 
       <router-outlet />
-    </section>
-  </div>
+    </div>
+  </section>
 </main>
