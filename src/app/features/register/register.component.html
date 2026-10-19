@@ -15,6 +15,16 @@
       placeholder="Full name"
     />
   </div>
+  @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      @if (registerForm.get('name')?.hasError('required')) {
+        <span>Please enter your full name.</span>
+      } @else if (registerForm.get('name')?.hasError('minlength')) {
+        <span>Your name must be at least 3 characters long.</span>
+      }
+    </div>
+  }
 
   <div class="relative">
     <label for="username" class="sr-only">Username (optional)</label>
@@ -43,6 +53,16 @@
       placeholder="Email address"
     />
   </div>
+  @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
+    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      @if (registerForm.get('email')?.hasError('required')) {
+        <span>Please enter your email address.</span>
+      } @else if (registerForm.get('email')?.hasError('email')) {
+        <span>Please enter a valid email address, like name&#64;example.com.</span>
+      }
+    </div>
+  }
 
   <div class="relative">
     <label for="gender" class="sr-only">Gender</label>
@@ -59,6 +79,12 @@
       <option value="female">Female</option>
     </select>
   </div>
+  @if (registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched) {
+    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span>Please select your gender.</span>
+    </div>
+  }
 
   <div class="relative">
     <label for="dateOfBirth" class="sr-only">Date of birth</label>
@@ -72,6 +98,12 @@
       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
     />
   </div>
+  @if (registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched) {
+    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span>Please enter your date of birth.</span>
+    </div>
+  }
 
   <div class="relative">
     <label for="password" class="sr-only">Password</label>
@@ -86,6 +118,19 @@
       placeholder="Password"
     />
   </div>
+  @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
+    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      @if (registerForm.get('password')?.hasError('required')) {
+        <span>Please enter a password.</span>
+      } @else if (registerForm.get('password')?.hasError('pattern')) {
+        <span
+          >Your password must be at least 8 characters and include an uppercase letter, a lowercase
+          letter, a number, and a special character (like ! &#64; # $).</span
+        >
+      }
+    </div>
+  }
 
   <div class="relative">
     <label for="rePassword" class="sr-only">Confirm password</label>
