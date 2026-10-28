@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { InputFieldComponent } from '../../shared/components/input-field/input-field.component';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, InputFieldComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css',
 })

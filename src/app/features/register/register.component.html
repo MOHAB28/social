@@ -2,149 +2,98 @@
 <p class="text-sm text-gray-500 mb-6">It's quick and easy.</p>
 
 <form (ngSubmit)="register()" class="space-y-4" [formGroup]="registerForm">
-  <div class="relative">
-    <label for="name" class="sr-only">Full name</label>
-    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-      <i class="fa-regular fa-user text-gray-400"></i>
-    </div>
-    <input
-      formControlName="name"
-      type="text"
-      id="name"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
-      placeholder="Full name"
-    />
-  </div>
-  @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
-    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      @if (registerForm.get('name')?.hasError('required')) {
-        <span>Please enter your full name.</span>
-      } @else if (registerForm.get('name')?.hasError('minlength')) {
-        <span>Your name must be at least 3 characters long.</span>
-      }
-    </div>
-  }
+  <app-input-field
+    [control]="registerForm.controls.name"
+    inputId="name"
+    label="Full name"
+    icon="fa-regular fa-user"
+    [errorMessages]="{
+      required: 'Please enter your full name.',
+      minlength: 'Your name must be at least 3 characters long.',
+    }"
+  />
 
-  <div class="relative">
-    <label for="username" class="sr-only">Username (optional)</label>
-    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-      <i class="fa-solid fa-at text-gray-400"></i>
+  <app-input-field
+    [control]="registerForm.controls.userName"
+    inputId="username"
+    label="Username (optional)"
+    icon="fa-solid fa-at"
+  />
+
+  <app-input-field
+    [control]="registerForm.controls.email"
+    inputId="email"
+    inputType="email"
+    label="Email address"
+    icon="fa-regular fa-envelope"
+    [errorMessages]="{
+      required: 'Please enter your email address.',
+      email: 'Please enter a valid email address, like name&#64;example.com.',
+    }"
+  />
+
+  <!-- Gender is a <select>, not an <input>, so it stays here instead of using app-input-field -->
+  @let genderError = registerForm.controls.gender.invalid && registerForm.controls.gender.touched;
+  <div>
+    <div class="relative">
+      <label for="gender" class="sr-only">Gender</label>
+      <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
+        <i
+          class="fa-solid fa-user-group"
+          [class.text-gray-400]="!genderError"
+          [class.text-red-600]="genderError"
+        ></i>
+      </div>
+      <select
+        formControlName="gender"
+        id="gender"
+        class="bg-gray-50 border text-gray-900 text-sm rounded-xl block w-full ps-10 p-3"
+        [class]="
+          genderError
+            ? 'border-red-500 focus:ring-red-500 focus:border-red-500'
+            : 'border-gray-300 focus:ring-mainColor focus:border-mainColor'
+        "
+      >
+        <option value="" disabled>Select gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+      </select>
     </div>
-    <input
-      formControlName="userName"
-      type="text"
-      id="username"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
-      placeholder="Username (optional)"
-    />
+    @if (genderError) {
+      <p class="mt-1.5 text-sm text-red-600" role="alert">Please select your gender.</p>
+    }
   </div>
 
-  <div class="relative">
-    <label for="email" class="sr-only">Email address</label>
-    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-      <i class="fa-regular fa-envelope text-gray-400"></i>
-    </div>
-    <input
-      formControlName="email"
-      type="email"
-      id="email"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
-      placeholder="Email address"
-    />
-  </div>
-  @if (registerForm.get('email')?.invalid && registerForm.get('email')?.touched) {
-    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      @if (registerForm.get('email')?.hasError('required')) {
-        <span>Please enter your email address.</span>
-      } @else if (registerForm.get('email')?.hasError('email')) {
-        <span>Please enter a valid email address, like name&#64;example.com.</span>
-      }
-    </div>
-  }
+  <app-input-field
+    [control]="registerForm.controls.dateOfBirth"
+    inputId="dateOfBirth"
+    inputType="date"
+    label="Date of birth"
+    icon="fa-regular fa-calendar"
+    [errorMessages]="{ required: 'Please enter your date of birth.' }"
+  />
 
-  <div class="relative">
-    <label for="gender" class="sr-only">Gender</label>
-    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-      <i class="fa-solid fa-user-group text-gray-400"></i>
-    </div>
-    <select
-      formControlName="gender"
-      id="gender"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
-    >
-      <option value="" selected disabled>Select gender</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </select>
-  </div>
-  @if (registerForm.get('gender')?.invalid && registerForm.get('gender')?.touched) {
-    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <span>Please select your gender.</span>
-    </div>
-  }
+  <app-input-field
+    [control]="registerForm.controls.password"
+    inputId="password"
+    inputType="password"
+    label="Password"
+    icon="fa-solid fa-key"
+    [errorMessages]="{
+      required: 'Please enter a password.',
+      pattern:
+        'Your password must be at least 8 characters and include an uppercase letter, a lowercase letter, a number, and a special character (like ! &#64; # $).',
+    }"
+  />
 
-  <div class="relative">
-    <label for="dateOfBirth" class="sr-only">Date of birth</label>
-    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-      <i class="fa-regular fa-calendar text-gray-400"></i>
-    </div>
-    <input
-      formControlName="dateOfBirth"
-      type="date"
-      id="dateOfBirth"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
-    />
-  </div>
-  @if (registerForm.get('dateOfBirth')?.invalid && registerForm.get('dateOfBirth')?.touched) {
-    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      <span>Please enter your date of birth.</span>
-    </div>
-  }
-
-  <div class="relative">
-    <label for="password" class="sr-only">Password</label>
-    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-      <i class="fa-solid fa-key text-gray-400"></i>
-    </div>
-    <input
-      formControlName="password"
-      type="password"
-      id="password"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
-      placeholder="Password"
-    />
-  </div>
-  @if (registerForm.get('password')?.invalid && registerForm.get('password')?.touched) {
-    <div class="flex items-center gap-2 p-3 text-sm text-red-800 rounded-xl bg-red-50" role="alert">
-      <i class="fa-solid fa-circle-exclamation"></i>
-      @if (registerForm.get('password')?.hasError('required')) {
-        <span>Please enter a password.</span>
-      } @else if (registerForm.get('password')?.hasError('pattern')) {
-        <span
-          >Your password must be at least 8 characters and include an uppercase letter, a lowercase
-          letter, a number, and a special character (like ! &#64; # $).</span
-        >
-      }
-    </div>
-  }
-
-  <div class="relative">
-    <label for="rePassword" class="sr-only">Confirm password</label>
-    <div class="absolute inset-y-0 inset-s-0 flex items-center ps-3.5 pointer-events-none">
-      <i class="fa-solid fa-key text-gray-400"></i>
-    </div>
-    <input
-      formControlName="rePassword"
-      type="password"
-      id="rePassword"
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus:ring-mainColor focus:border-mainColor block w-full ps-10 p-3"
-      placeholder="Confirm password"
-    />
-  </div>
+  <app-input-field
+    [control]="registerForm.controls.rePassword"
+    inputId="rePassword"
+    inputType="password"
+    label="Confirm password"
+    icon="fa-solid fa-key"
+    [errorMessages]="{ required: 'Please confirm your password.' }"
+  />
 
   <button
     [disabled]="registerForm.invalid"
